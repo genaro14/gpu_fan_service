@@ -1,0 +1,21 @@
+[Unit]
+Description=GPU Fan MQTT Controller
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# Put the fan at maximum before the controller starts.
+ExecStartPre=/usr/local/sbin/gpu-fan-safe.sh
+
+ExecStart=/usr/bin/python3 /usr/local/bin/gpu-fan-mqtt.py
+
+# If Python exits for ANY reason, put the fan at maximum.
+ExecStopPost=/usr/local/sbin/gpu-fan-safe.sh
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
