@@ -1,0 +1,7 @@
+mosquitto_sub \
+  -h 192.168.10.133 \
+  -p 1883 \
+  -u mqtt \
+  -P 'Anana25' \
+  -t 'gpu/170hx/status' \
+  -v
